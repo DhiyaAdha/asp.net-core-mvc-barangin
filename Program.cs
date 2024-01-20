@@ -15,7 +15,6 @@ builder.Services.AddControllersWithViews()
     {
         // Konfigurasi opsional untuk Newtonsoft.Json
         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-        // Tambahkan konfigurasi lain sesuai kebutuhan
     });
 
 /*

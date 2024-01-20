@@ -23,13 +23,7 @@ namespace barangin.Controllers
         [Route("Main")]
         public IActionResult Index()
         {
-            return new ContentResult()
-            {
-                Content = "<html><body><h1>Halaman Barang</h1></body></html>",
-            ContentType = "text/html",
-            StatusCode = 200
-            };
-            // return View();
+            return View("Main");
         }
 
         [Route("BarangJson")]
@@ -44,11 +38,18 @@ namespace barangin.Controllers
             return Json(emp);
         }
 
-        [Route("Create")]     
+        [Route("Create")]
         public IActionResult Create()
-        {   
-            return View();
-        } 
+        {
+            return View("CreateBarang/Create");
+        }
+
+        [Route("Detail")]
+        public IActionResult Detail()
+        {
+            return View("DetailBarang/DetailPage");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
