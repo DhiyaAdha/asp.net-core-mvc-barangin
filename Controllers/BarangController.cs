@@ -137,11 +137,63 @@ namespace barangin.Controllers
             }
         }
 
-
-        [Route("Detail")]
-        public IActionResult Detail()
+        //get data and show by id
+        [HttpGet]
+        [Route("Detail/{id}")]
+        public IActionResult Detail(int id)
         {
-            return View("DetailBarang/DetailPage");
+            try
+            {
+                // Mendapatkan nilai ConnectionStrings dari appsettings.json
+                string connectionString = _configuration.GetConnectionString("Default");
+
+                // Membuat instance dari ConnectionDb
+                using (var dbConnection = new ConnectionDb(connectionString))
+                {
+                    // Menggunakan fungsi TestConnection untuk memastikan koneksi ke database
+                    dbConnection.TestConnection();
+
+                    // Query SQL untuk mengambil data barang dari tabel berdasarkan ID
+                    string query = $"SELECT * FROM barang WHERE id = {id}";
+
+                    // Membuat MySqlCommand
+                    using (var command = new MySqlCommand(query, dbConnection.CreateCommand().Connection))
+                    {
+                        // Eksekusi query dan membaca hasil
+                        using (var reader = command.ExecuteReader())
+                        {
+                            // Mengecek apakah data ditemukan
+                            if (reader.Read())
+                            {
+                                // Membaca data dari hasil query
+                                int barangId = reader.GetInt32("id");
+                                string namaBarang = reader.GetString("nama_barang");
+                                int qty = reader.GetInt32("qty");
+
+                                // Membuat objek Barang
+                                Barang barang = new Barang { Id = barangId, nama_barang = namaBarang, Qty = qty };
+
+                                // Menampilkan data di console
+                                Console.WriteLine($"ID: {barang.Id}, Nama Barang: {barang.nama_barang}, Qty: {barang.Qty}");
+
+                                // Mengirim data ke tampilan (view)
+                                ViewBag.BarangDetail = barang;
+                                return View("DetailBarang/DetailPage");
+                            }
+                            else
+                            {
+                                // Jika data tidak ditemukan, kembalikan ke halaman Index
+                                return RedirectToAction("Index");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Kesalahan: {ex.Message}");
+                return View("Index");
+            }
         }
 
         [Route("Update")]
