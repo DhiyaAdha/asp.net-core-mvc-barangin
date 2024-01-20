@@ -101,8 +101,42 @@ namespace barangin.Controllers
         [Route("SubmitCreate")]
         public IActionResult SubmitCreate(Barang barang)
         {
-            return RedirectToAction("Index");
+            try
+            {
+                barang.Timestamp = DateTime.Now;
+
+                // Menggunakan koneksi database yang sama dengan yang digunakan dalam Index
+                using (var connectionDb = new ConnectionDb(_configuration.GetConnectionString("Default")))
+                {
+                    // Buat command menggunakan koneksi dari ConnectionDb
+                    using (var cmd = connectionDb.CreateCommand())
+                    {
+                        // Definisikan pernyataan SQL INSERT
+                        cmd.CommandText = "INSERT INTO barang (nama_barang, qty, timestamp) VALUES (@nama_barang, @Qty, @Timestamp)";
+
+                        // Parameterisasi nilai-nilai
+                        cmd.Parameters.AddWithValue("@nama_barang", barang.nama_barang);
+                        cmd.Parameters.AddWithValue("@Qty", barang.Qty);
+                        cmd.Parameters.AddWithValue("@Timestamp", barang.Timestamp);
+
+                        // Eksekusi pernyataan SQL
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // Menampilkan pesan ke console
+                Console.WriteLine($"Data Barang berhasil disimpan pada {barang.Timestamp}");
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Kesalahan saat menyimpan data: {ex.Message}");
+                // Kembali ke halaman "Create"
+                return View("CreateBarang/Create");
+            }
         }
+
 
         [Route("Detail")]
         public IActionResult Detail()
