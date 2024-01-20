@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using barangin.Models;
 using barangin.Database;
+using MySqlConnector;
+
+
 
 
 namespace barangin.Controllers
@@ -38,18 +36,40 @@ namespace barangin.Controllers
                     // Menggunakan fungsi TestConnection untuk memastikan koneksi ke database
                     dbConnection.TestConnection();
 
-                    // Mengambil data dari database dan mengisi properti kelas BarangList
-                    BarangList = dbConnection.GetBarangList();
+                    // Query SQL untuk mengambil data barang dari tabel
+                    string query = "SELECT * FROM barang";
 
-                    // Menampilkan data di console
-                    foreach (var barang in BarangList)
+                    // Membuat MySqlCommand
+                    using (var command = new MySqlCommand(query, dbConnection.CreateCommand().Connection))
                     {
-                        Console.WriteLine($"ID: {barang.Id}, Nama Barang: {barang.nama_barang}, Qty: {barang.Qty}");
-                    }
+                        // Eksekusi query dan membaca hasil
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<Barang> BarangList = new List<Barang>();
 
-                    // Mengirim data ke tampilan (view)
-                    ViewBag.BarangList = BarangList;
-                    return View("Main");
+                            while (reader.Read())
+                            {
+                                // Membaca data dari hasil query
+                                int id = reader.GetInt32("id");
+                                string namaBarang = reader.GetString("nama_barang");
+                                int qty = reader.GetInt32("qty");
+
+                                // Membuat objek Barang dan menambahkannya ke daftar barang
+                                Barang barang = new Barang { Id = id, nama_barang = namaBarang, Qty = qty };
+                                BarangList.Add(barang);
+                            }
+
+                            // Menampilkan data di console
+                            foreach (var barang in BarangList)
+                            {
+                                Console.WriteLine($"ID: {barang.Id}, Nama Barang: {barang.nama_barang}, Qty: {barang.Qty}");
+                            }
+
+                            // Mengirim data ke tampilan (view)
+                            ViewBag.BarangList = BarangList;
+                            return View("Main");
+                        }
+                    }
                 }
             }
             catch (Exception ex)
