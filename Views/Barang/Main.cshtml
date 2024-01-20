@@ -24,13 +24,18 @@
                 <tr>
                     <td>@barang.nama_barang</td>
                     <td>@barang.Qty</td>
+                    <td>
+                        <a href="/Barang/Detail/@barang.Id"><button type="button">Detail</button></a>
+                        <a href="/Barang/Update/@barang.Id"><button type="button">Update</button></a>
+                        <a href="/Barang/Delete/@barang.Id"><button type="button">Delete</button></a>
+                    </td>
                 </tr>
             }
         }
         else
         {
             <tr>
-                <td colspan="2">Data tidak tersedia.</td>
+                <td colspan="3">Data tidak tersedia.</td>
             </tr>
         }
     </tbody>
