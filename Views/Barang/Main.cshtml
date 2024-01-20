@@ -1,15 +1,5 @@
 @page
-@model barangin.Views.Barang.Main
-
-@{
-    // Data dummy
-    var dummyData = new List<Barang>
-    {
-        new Barang { Name = "Kopi", Qty = 10 },
-        new Barang { Name = "Teh", Qty = 15},
-        new Barang { Name = "Susu", Qty = 8}
-    };
-}
+@model List<Barang>
 
 <h1>Halaman Utama</h1>
 
@@ -26,17 +16,21 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in dummyData)
+        @if (ViewBag.BarangList != null && ViewBag.BarangList is IEnumerable<barangin.Models.Barang> &&
+        ((IEnumerable<barangin.Models.Barang>)ViewBag.BarangList).Any())
+        {
+            @foreach (var barang in ViewBag.BarangList)
+            {
+                <tr>
+                    <td>@barang.nama_barang</td>
+                    <td>@barang.Qty</td>
+                </tr>
+            }
+        }
+        else
         {
             <tr>
-                <td>@item.Name</td>
-                <td>@item.Qty</td>
-                <td>
-                    <!-- Tombol aksi untuk setiap baris -->
-                    <button type="button" onclick="location.href='/Barang/Detail'">Detail</button>
-                    <button type="button" onclick="location.href='/Barang/Update'">Update</button>
-                    <button type="button" onclick="location.href='/Barang/Delete'">Delete</button>
-                </td>
+                <td colspan="2">Data tidak tersedia.</td>
             </tr>
         }
     </tbody>

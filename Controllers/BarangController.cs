@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using barangin.Models;
+using barangin.Database;
 
 
 namespace barangin.Controllers
@@ -13,18 +14,49 @@ namespace barangin.Controllers
     [Route("Barang")]
     public class BarangController : Controller
     {
-        private readonly ILogger<BarangController> _logger;
+        private readonly IConfiguration _configuration;
 
-        public BarangController(ILogger<BarangController> logger)
+        public BarangController(IConfiguration configuration)
         {
-            _logger = logger;
-
+            _configuration = configuration;
         }
 
-        [Route("/")]
+        public List<Barang> BarangList { get; set; } = new List<Barang>();
+
+        [HttpGet]
+        [Route("")]
         public IActionResult Index()
         {
-            return View("Main");
+            try
+            {
+                // Mendapatkan nilai ConnectionStrings dari appsettings.json
+                string connectionString = _configuration.GetConnectionString("Default");
+
+                // Membuat instance dari ConnectionDb
+                using (var dbConnection = new ConnectionDb(connectionString))
+                {
+                    // Menggunakan fungsi TestConnection untuk memastikan koneksi ke database
+                    dbConnection.TestConnection();
+
+                    // Mengambil data dari database dan mengisi properti kelas BarangList
+                    BarangList = dbConnection.GetBarangList();
+
+                    // Menampilkan data di console
+                    foreach (var barang in BarangList)
+                    {
+                        Console.WriteLine($"ID: {barang.Id}, Nama Barang: {barang.nama_barang}, Qty: {barang.Qty}");
+                    }
+
+                    // Mengirim data ke tampilan (view)
+                    ViewBag.BarangList = BarangList;
+                    return View("Main");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Kesalahan: {ex.Message}");
+                return View("Error");
+            }
         }
 
         [Route("BarangJson")]
@@ -33,7 +65,7 @@ namespace barangin.Controllers
             Barang emp = new Barang()
             {
                 Id = 1,
-                Name = "Kopi",
+                nama_barang = "Kopi",
                 Qty = 10
             };
             return Json(emp);
