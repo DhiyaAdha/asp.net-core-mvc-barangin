@@ -1,11 +1,32 @@
 @page
 @model barangin.Views.Barang.DetailBarang.DetailPage
-@{
-    @* ViewData["Title"] = "halaman detail"; *@
-}
 
-<h1>Halaman Detail</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detail Page</title>
 
-<div>
+</head>
+<body>
 
-</div>
+    <h1>Halaman Detail</h1>
+
+    <div>
+        <label for="NamaBarang">Nama Barang:</label>
+        @* <p>@Model.NamaBarang</p> *@
+        <input type="text" id="NamaBarang" name="NamaBarang" required />
+    </div>
+
+    <div>
+        <label for="Qty">Qty:</label>
+        <input type="number" id="Qty" name="Qty" required />
+    </div>
+
+    <div>
+        <a href="/"><button type="button">Back to Home</button></a>
+    </div>
+
+</body>
+</html>

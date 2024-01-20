@@ -1,20 +1,22 @@
 @page
+@model barangin.Views.Barang.UpdateBarang.Update
 
-<h1>Halaman Create</h1>
+<h1>Halaman Update</h1>
 
-<form method="post" action="/Barang/Create">
+<div>
     <div>
         <label for="NamaBarang">Nama Barang:</label>
+        @* <p>@Model.NamaBarang</p> *@
         <input type="text" id="NamaBarang" name="NamaBarang" required />
     </div>
-    
+
     <div>
         <label for="Qty">Qty:</label>
         <input type="number" id="Qty" name="Qty" required />
     </div>
 
     <div>
-        <button type="submit">Submit</button>
         <a href="/"><button type="button">Back to Home</button></a>
     </div>
-</form>
+
+</div>

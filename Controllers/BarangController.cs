@@ -18,9 +18,10 @@ namespace barangin.Controllers
         public BarangController(ILogger<BarangController> logger)
         {
             _logger = logger;
+
         }
 
-        [Route("Main")]
+        [Route("/")]
         public IActionResult Index()
         {
             return View("Main");
@@ -44,10 +45,23 @@ namespace barangin.Controllers
             return View("CreateBarang/Create");
         }
 
+        [HttpPost]
+        [Route("SubmitCreate")]
+        public IActionResult SubmitCreate(Barang barang)
+        {
+            return RedirectToAction("Index");
+        }
+
         [Route("Detail")]
         public IActionResult Detail()
         {
             return View("DetailBarang/DetailPage");
+        }
+
+        [Route("Update")]
+        public IActionResult Update()
+        {
+            return View("UpdateBarang/Update");
         }
 
 

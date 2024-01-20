@@ -1,8 +1,43 @@
 @page
-@* @model barangin.Views.Barang.Main *@
+@model barangin.Views.Barang.Main
+
+@{
+    // Data dummy
+    var dummyData = new List<Barang>
+    {
+        new Barang { Name = "Kopi", Qty = 10 },
+        new Barang { Name = "Teh", Qty = 15},
+        new Barang { Name = "Susu", Qty = 8}
+    };
+}
 
 <h1>Halaman Utama</h1>
 
 <div>
-    
+    <a href="/Barang/Create"><button type="button">Create</button></a>
 </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nama Barang</th>
+            <th>Jumlah</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in dummyData)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Qty</td>
+                <td>
+                    <!-- Tombol aksi untuk setiap baris -->
+                    <button type="button" onclick="location.href='/Barang/Detail'">Detail</button>
+                    <button type="button" onclick="location.href='/Barang/Update'">Update</button>
+                    <button type="button" onclick="location.href='/Barang/Delete'">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

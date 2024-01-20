@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace barangin.Views.Barang
+namespace barangin.Views.Barang.UpdateBarang
 {
-    public class Create : PageModel
+    public class Update : PageModel
     {
-        private readonly ILogger<Create> _logger;
+        private readonly ILogger<Update> _logger;
 
-        public Create(ILogger<Create> logger)
+        public Update(ILogger<Update> logger)
         {
             _logger = logger;
         }
