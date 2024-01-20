@@ -14,6 +14,7 @@ namespace barangin.Database
         {
             _connectionString = connectionString;
             _connection = new MySqlConnection(_connectionString);
+            _connection.Open();
         }
 
         public void TestConnection()
