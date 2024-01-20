@@ -10,8 +10,7 @@ using barangin.Models;
 
 namespace barangin.Controllers
 {
-    // [Route("[controller]")]
-    // [Route("Barang")]
+    [Route("Barang")]
     public class BarangController : Controller
     {
         private readonly ILogger<BarangController> _logger;
@@ -21,7 +20,7 @@ namespace barangin.Controllers
             _logger = logger;
         }
 
-        [Route("Barang")]
+        [Route("Main")]
         public IActionResult Index()
         {
             return new ContentResult()
@@ -33,7 +32,7 @@ namespace barangin.Controllers
             // return View();
         }
 
-        [Route("Barang/BarangJson")]
+        [Route("BarangJson")]
         public IActionResult BarangJson()
         {
             Barang emp = new Barang()
@@ -45,7 +44,11 @@ namespace barangin.Controllers
             return Json(emp);
         }
 
-        
+        [Route("Create")]     
+        public IActionResult Create()
+        {   
+            return View();
+        } 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

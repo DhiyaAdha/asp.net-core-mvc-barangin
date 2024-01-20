@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Users\\LJIMM23002\\1dhaproject\\1DotNet\\webdotnet\\barangin\\barangin.csproj": {}
+    "D:\\Users\\LJIMM23002\\1dhaproject\\1DotNet\\webdotnet\\barangin\\barangin.csproj": {}
   },
   "projects": {
-    "d:\\Users\\LJIMM23002\\1dhaproject\\1DotNet\\webdotnet\\barangin\\barangin.csproj": {
+    "D:\\Users\\LJIMM23002\\1dhaproject\\1DotNet\\webdotnet\\barangin\\barangin.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Users\\LJIMM23002\\1dhaproject\\1DotNet\\webdotnet\\barangin\\barangin.csproj",
+        "projectUniqueName": "D:\\Users\\LJIMM23002\\1dhaproject\\1DotNet\\webdotnet\\barangin\\barangin.csproj",
         "projectName": "barangin",
-        "projectPath": "d:\\Users\\LJIMM23002\\1dhaproject\\1DotNet\\webdotnet\\barangin\\barangin.csproj",
+        "projectPath": "D:\\Users\\LJIMM23002\\1dhaproject\\1DotNet\\webdotnet\\barangin\\barangin.csproj",
         "packagesPath": "D:\\Users\\LJIMM23002\\.nuget\\packages\\",
-        "outputPath": "d:\\Users\\LJIMM23002\\1dhaproject\\1DotNet\\webdotnet\\barangin\\obj\\",
+        "outputPath": "D:\\Users\\LJIMM23002\\1dhaproject\\1DotNet\\webdotnet\\barangin\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "D:\\Users\\LJIMM23002\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -43,6 +43,10 @@
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
               "version": "[8.0.1, )"
+            },
+            "MySqlConnector": {
+              "target": "Package",
+              "version": "[2.3.4, )"
             }
           },
           "imports": [

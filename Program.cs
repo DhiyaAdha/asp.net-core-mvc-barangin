@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json; // pastikan menggunakan direktif ini
-
+using Newtonsoft.Json; 
+using MySqlConnector;
+using barangin.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,26 @@ builder.Services.AddControllersWithViews()
         // Tambahkan konfigurasi lain sesuai kebutuhan
     });
 
-var app = builder.Build();
+/*
+* Setup database Mysql
+*/
+builder.Services.AddScoped<ConnectionDb>(provider =>
+{
+    // Ambil connection string dari appsettings.json
+    string connectionString = builder.Configuration.GetConnectionString("Default");
+
+    // Membuat instance ConnectionDb dan memberikan connection string
+    return new ConnectionDb(connectionString);
+});
+
+var app = builder.Build(); // Pindahkan ini ke atas
+
+// Panggil TestConnection setelah membuat instance ConnectionDb
+using (var scope = app.Services.CreateScope())
+{
+    var connectionDb = scope.ServiceProvider.GetRequiredService<ConnectionDb>();
+    connectionDb.TestConnection();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

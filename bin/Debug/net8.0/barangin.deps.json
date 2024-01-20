@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v8.0": {
       "barangin/1.0.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "8.0.1"
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "8.0.1",
+          "MySqlConnector": "2.3.4"
         },
         "runtime": {
           "barangin.dll": {}
@@ -40,6 +41,18 @@
         }
       },
       "Microsoft.CSharp/4.7.0": {},
+      "Microsoft.Extensions.Logging.Abstractions/7.0.1": {},
+      "MySqlConnector/2.3.4": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "7.0.1"
+        },
+        "runtime": {
+          "lib/net8.0/MySqlConnector.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.3.4.0"
+          }
+        }
+      },
       "Newtonsoft.Json/13.0.3": {
         "runtime": {
           "lib/net6.0/Newtonsoft.Json.dll": {
@@ -87,6 +100,20 @@
       "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
       "path": "microsoft.csharp/4.7.0",
       "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Abstractions/7.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pkeBFx0vqMW/A3aUVHh7MPu3WkBhaVlezhSZeb1c9XD0vUReYH1TLFSy5MxJgZfmz5LZzYoErMorlYZiwpOoNA==",
+      "path": "microsoft.extensions.logging.abstractions/7.0.1",
+      "hashPath": "microsoft.extensions.logging.abstractions.7.0.1.nupkg.sha512"
+    },
+    "MySqlConnector/2.3.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4IDhZcZuh/wP77pwPeW2HtZwfLlZ3ibWNLfHvXmwqe1utfarRx1JMMkiLMWpWT71P9fkrr0b9874//30Gg0k3A==",
+      "path": "mysqlconnector/2.3.4",
+      "hashPath": "mysqlconnector.2.3.4.nupkg.sha512"
     },
     "Newtonsoft.Json/13.0.3": {
       "type": "package",

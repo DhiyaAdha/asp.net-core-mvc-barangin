@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "5NbxwOmF07uap/3OUvAA0s4p3T5tAOaTfqKH92H8Dmd7n12l5fa/c0NkdXlrLu/JQ3g43qrXLXleoSLInR95Rw==",
+  "dgSpecHash": "HoN1ymdXHVLW2sV0FFDMmvk50oQtelOubRQdX4AKdCh5bSHNGBAfdq9tBAZR55OcLkb1oXKkp6O5P7k6JobJCQ==",
   "success": true,
-  "projectFilePath": "d:\\Users\\LJIMM23002\\1dhaproject\\1DotNet\\webdotnet\\barangin\\barangin.csproj",
+  "projectFilePath": "D:\\Users\\LJIMM23002\\1dhaproject\\1DotNet\\webdotnet\\barangin\\barangin.csproj",
   "expectedPackageFiles": [
     "D:\\Users\\LJIMM23002\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\8.0.1\\microsoft.aspnetcore.jsonpatch.8.0.1.nupkg.sha512",
     "D:\\Users\\LJIMM23002\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\8.0.1\\microsoft.aspnetcore.mvc.newtonsoftjson.8.0.1.nupkg.sha512",
     "D:\\Users\\LJIMM23002\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "D:\\Users\\LJIMM23002\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.1\\microsoft.extensions.logging.abstractions.7.0.1.nupkg.sha512",
+    "D:\\Users\\LJIMM23002\\.nuget\\packages\\mysqlconnector\\2.3.4\\mysqlconnector.2.3.4.nupkg.sha512",
     "D:\\Users\\LJIMM23002\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "D:\\Users\\LJIMM23002\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512"
   ],

@@ -35,3 +35,4 @@ d:\Users\LJIMM23002\1dhaproject\1DotNet\webdotnet\barangin\bin\Debug\net8.0\Newt
 d:\Users\LJIMM23002\1dhaproject\1DotNet\webdotnet\barangin\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
 d:\Users\LJIMM23002\1dhaproject\1DotNet\webdotnet\barangin\obj\Debug\net8.0\barangin.csproj.AssemblyReference.cache
 d:\Users\LJIMM23002\1dhaproject\1DotNet\webdotnet\barangin\obj\Debug\net8.0\barangin.csproj.CopyComplete
+d:\Users\LJIMM23002\1dhaproject\1DotNet\webdotnet\barangin\bin\Debug\net8.0\MySqlConnector.dll
