@@ -202,6 +202,49 @@ namespace barangin.Controllers
             return View("UpdateBarang/Update");
         }
 
+        [HttpDelete]
+        [Route("Delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                // Mendapatkan nilai ConnectionStrings dari appsettings.json
+                string connectionString = _configuration.GetConnectionString("Default");
+
+                // Membuat instance dari ConnectionDb
+                using (var dbConnection = new ConnectionDb(connectionString))
+                {
+                    // Menggunakan fungsi TestConnection untuk memastikan koneksi ke database
+                    dbConnection.TestConnection();
+
+                    // Query SQL untuk menghapus data barang dari tabel berdasarkan ID
+                    string query = $"DELETE FROM barang WHERE id = {id}";
+
+                    // Membuat MySqlCommand
+                    using (var command = new MySqlCommand(query, dbConnection.CreateCommand().Connection))
+                    {
+                        // Eksekusi pernyataan SQL DELETE
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            Console.WriteLine($"Data barang dengan ID {id} berhasil dihapus");
+                            return Json(new { success = true, message = "Data berhasil dihapus." });
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Data barang dengan ID {id} tidak ditemukan");
+                            return Json(new { success = false, message = "Data tidak ditemukan." });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Kesalahan: {ex.Message}");
+                return Json(new { success = false, message = "Terjadi kesalahan dalam menghapus data." });
+            }
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

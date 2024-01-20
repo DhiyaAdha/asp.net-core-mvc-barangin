@@ -7,6 +7,20 @@
     <a href="/Barang/Create"><button type="button">Create</button></a>
 </div>
 
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Message"]
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["Error"]
+    </div>
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -27,7 +41,7 @@
                     <td>
                         <a href="/Barang/Detail/@barang.Id"><button type="button">Detail</button></a>
                         <a href="/Barang/Update/@barang.Id"><button type="button">Update</button></a>
-                        <a href="/Barang/Delete/@barang.Id"><button type="button">Delete</button></a>
+                        <button type="button" onclick="confirmDelete(@barang.Id)">Delete</button>
                     </td>
                 </tr>
             }
@@ -40,3 +54,33 @@
         }
     </tbody>
 </table>
+
+<script>
+    function confirmDelete(id) {
+        var result = confirm("Apakah Anda yakin ingin menghapus?");
+        if (result) {
+            // Menggunakan AJAX untuk panggilan DELETE
+            $.ajax({
+                type: 'DELETE',
+                url: '/Barang/Delete/' + id,
+                success: function (data) {
+                    console.log('Success:', data);
+
+                    if (data.success) {
+                        alert('Berhasil menghapus data.');
+                        window.location.reload(); // Refresh halaman setelah penghapusan
+                    } else {
+                        alert('Gagal menghapus data: ' + data.message);
+                    }
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                    // Handle response jika terjadi kesalahan
+                    alert('Gagal menghapus data.');
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>
