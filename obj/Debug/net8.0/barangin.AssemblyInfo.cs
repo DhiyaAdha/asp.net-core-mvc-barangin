@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("barangin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+31a246355e1436e098c86a2489034de12b342d93")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+849f12b52aeb134ea1cdc14f3dadf9afa3f14203")]
 [assembly: System.Reflection.AssemblyProductAttribute("barangin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("barangin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

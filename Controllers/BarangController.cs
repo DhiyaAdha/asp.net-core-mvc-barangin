@@ -256,9 +256,10 @@ namespace barangin.Controllers
         }
 
         // update data by id
-        [HttpPut]
-        [Route("SubmitUpdate")]
-        public IActionResult SubmitUpdate(Barang barang)
+        [HttpPost]
+        [Route("SubmitUpdate/{id}")]
+        [ValidateAntiForgeryToken]
+        public IActionResult SubmitUpdate(int id, Barang barang)
         {
             try
             {
@@ -272,7 +273,7 @@ namespace barangin.Controllers
                         cmd.CommandText = "UPDATE barang SET nama_barang = @nama_barang, qty = @Qty WHERE id = @Id";
 
                         // Parameterisasi nilai-nilai
-                        cmd.Parameters.AddWithValue("@Id", barang.Id);
+                        cmd.Parameters.AddWithValue("@Id", id); // Gunakan nilai ID dari parameter route
                         cmd.Parameters.AddWithValue("@nama_barang", barang.nama_barang);
                         cmd.Parameters.AddWithValue("@Qty", barang.Qty);
 
@@ -282,7 +283,7 @@ namespace barangin.Controllers
                 }
 
                 // Menampilkan pesan ke console
-                Console.WriteLine($"Data Barang dengan ID {barang.Id} berhasil diupdate pada {DateTime.Now}");
+                Console.WriteLine($"Data Barang dengan ID {id} berhasil diupdate pada {DateTime.Now}");
 
                 // Redirect ke halaman Index setelah update
                 return RedirectToAction("Index");
@@ -294,6 +295,7 @@ namespace barangin.Controllers
                 return View("UpdateBarang/Update", barang);
             }
         }
+
 
         [HttpDelete]
         [Route("Delete/{id}")]
