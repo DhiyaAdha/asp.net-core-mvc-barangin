@@ -196,15 +196,104 @@ namespace barangin.Controllers
             }
         }
 
-        [Route("Update")]
-        public IActionResult Update()
+        // show by id
+        [HttpGet]
+        [Route("Update/{id}")]
+        public IActionResult Update(int id)
         {
-            return View("UpdateBarang/Update");
+            try
+            {
+                // Mendapatkan nilai ConnectionStrings dari appsettings.json
+                string connectionString = _configuration.GetConnectionString("Default");
+
+                // Membuat instance dari ConnectionDb
+                using (var dbConnection = new ConnectionDb(connectionString))
+                {
+                    // Menggunakan fungsi TestConnection untuk memastikan koneksi ke database
+                    dbConnection.TestConnection();
+
+                    // Query SQL untuk mengambil data barang dari tabel berdasarkan ID
+                    string query = $"SELECT * FROM barang WHERE id = {id}";
+
+                    // Membuat MySqlCommand
+                    using (var command = new MySqlCommand(query, dbConnection.CreateCommand().Connection))
+                    {
+                        // Eksekusi query dan membaca hasil
+                        using (var reader = command.ExecuteReader())
+                        {
+                            // Mengecek apakah data ditemukan
+                            if (reader.Read())
+                            {
+                                // Membaca data dari hasil query
+                                int barangId = reader.GetInt32("id");
+                                string namaBarang = reader.GetString("nama_barang");
+                                int qty = reader.GetInt32("qty");
+
+                                // Membuat objek Barang
+                                Barang barang = new Barang { Id = barangId, nama_barang = namaBarang, Qty = qty };
+
+                                // Menampilkan data di console
+                                Console.WriteLine($"ID: {barang.Id}, Nama Barang: {barang.nama_barang}, Qty: {barang.Qty}");
+
+                                // Mengirim data ke tampilan (view)
+                                ViewBag.BarangDetail = barang;
+                                return View("UpdateBarang/Update");
+                            }
+                            else
+                            {
+                                // Jika data tidak ditemukan, kembalikan ke halaman Index
+                                return RedirectToAction("Index");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Kesalahan: {ex.Message}");
+                return View("Index");
+            }
         }
 
+        // update data by id
         [HttpPut]
         [Route("SubmitUpdate")]
-        
+        public IActionResult SubmitUpdate(Barang barang)
+        {
+            try
+            {
+                // Menggunakan koneksi database yang sama dengan yang digunakan dalam Index
+                using (var connectionDb = new ConnectionDb(_configuration.GetConnectionString("Default")))
+                {
+                    // Buat command menggunakan koneksi dari ConnectionDb
+                    using (var cmd = connectionDb.CreateCommand())
+                    {
+                        // Definisikan pernyataan SQL UPDATE
+                        cmd.CommandText = "UPDATE barang SET nama_barang = @nama_barang, qty = @Qty WHERE id = @Id";
+
+                        // Parameterisasi nilai-nilai
+                        cmd.Parameters.AddWithValue("@Id", barang.Id);
+                        cmd.Parameters.AddWithValue("@nama_barang", barang.nama_barang);
+                        cmd.Parameters.AddWithValue("@Qty", barang.Qty);
+
+                        // Eksekusi pernyataan SQL
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // Menampilkan pesan ke console
+                Console.WriteLine($"Data Barang dengan ID {barang.Id} berhasil diupdate pada {DateTime.Now}");
+
+                // Redirect ke halaman Index setelah update
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Kesalahan saat menyimpan data: {ex.Message}");
+                // Kembali ke halaman "Update"
+                return View("UpdateBarang/Update", barang);
+            }
+        }
 
         [HttpDelete]
         [Route("Delete/{id}")]
