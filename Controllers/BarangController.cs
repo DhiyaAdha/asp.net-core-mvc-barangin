@@ -202,6 +202,10 @@ namespace barangin.Controllers
             return View("UpdateBarang/Update");
         }
 
+        [HttpPut]
+        [Route("SubmitUpdate")]
+        
+
         [HttpDelete]
         [Route("Delete/{id}")]
         public IActionResult Delete(int id)

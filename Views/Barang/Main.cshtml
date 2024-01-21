@@ -7,20 +7,6 @@
     <a href="/Barang/Create"><button type="button">Create</button></a>
 </div>
 
-@if (TempData["Message"] != null)
-{
-    <div class="alert alert-success" role="alert">
-        @TempData["Message"]
-    </div>
-}
-
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger" role="alert">
-        @TempData["Error"]
-    </div>
-}
-
 <table class="table">
     <thead>
         <tr>
@@ -31,7 +17,7 @@
     </thead>
     <tbody>
         @if (ViewBag.BarangList != null && ViewBag.BarangList is IEnumerable<barangin.Models.Barang> &&
-        ((IEnumerable<barangin.Models.Barang>)ViewBag.BarangList).Any())
+            ((IEnumerable<barangin.Models.Barang>)ViewBag.BarangList).Any())
         {
             @foreach (var barang in ViewBag.BarangList)
             {
@@ -41,7 +27,7 @@
                     <td>
                         <a href="/Barang/Detail/@barang.Id"><button type="button">Detail</button></a>
                         <a href="/Barang/Update/@barang.Id"><button type="button">Update</button></a>
-                        <button type="button" onclick="confirmDelete(@barang.Id)">Delete</button>
+                        <button type="button" onclick="confirmDelete('@barang.Id')">Delete</button>
                     </td>
                 </tr>
             }
@@ -82,5 +68,3 @@
         }
     }
 </script>
-</body>
-</html>
